@@ -5,7 +5,7 @@ import java.text.ParseException;
 
 public interface ImportacaoCSVService {
 
-    void importarCSV() throws IOException, ParseException;
+    void importarCSV(String path) throws IOException, ParseException;
 
     void limparBase();
 

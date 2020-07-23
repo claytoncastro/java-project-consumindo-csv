@@ -11,7 +11,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "dados_importacao_csv")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class DadosImportacaoCSV implements AbstractEntity {
 
     @Id
@@ -25,6 +24,9 @@ public class DadosImportacaoCSV implements AbstractEntity {
     private Double valorCompra;
     private String unidadeMedida;
     private String bandeira;
+    private String siglaEstado;
+    private String municipio;
+    private String siglaRegiao;
 
     @Override
     public Long getId() {
@@ -97,6 +99,30 @@ public class DadosImportacaoCSV implements AbstractEntity {
 
     public void setBandeira(String bandeira) {
         this.bandeira = bandeira;
+    }
+
+    public String getSiglaEstado() {
+        return siglaEstado;
+    }
+
+    public void setSiglaEstado(String siglaEstado) {
+        this.siglaEstado = siglaEstado;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getSiglaRegiao() {
+        return siglaRegiao;
+    }
+
+    public void setSiglaRegiao(String siglaRegiao) {
+        this.siglaRegiao = siglaRegiao;
     }
 
 }

@@ -1,13 +1,18 @@
 package com.desafio.services;
 
+import com.desafio.model.DadosImportacaoCSV;
+import com.desafio.model.TipoValorMedio;
+
+import java.util.List;
+
 public interface DadosImportacaoService {
 
-    void mediaPrecoCombustivelPorMunicipio();
+    Double mediaPrecoCombustivelPorMunicipio(String nomeMunicipio);
 
-    void informacaoPorSiglaRegiao();
+    List<DadosImportacaoCSV> informacaoPorSiglaRegiao(String siglaRegiao);
 
     void dadosAgrupados(Integer opcaoTipoDadosAgrupados);
 
-    Double valorMedioCompraVenda(Integer opcaoTipoValorMedio);
+    void valorMedioCompraValorMedioVenda(TipoValorMedio opcaoTipoValorMedio);
 
 }

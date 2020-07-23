@@ -1,6 +1,6 @@
 package com.desafio.services;
 
-import com.desafio.model.Localidade;
+import com.desafio.model.DadosImportacaoCSV;
 import com.desafio.repositories.DadosImportacaoCSVRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class ImportacaoCSVServiceImpl implements ImportacaoCSVService {
             if(!"CABECALHO".equals(linha)) {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-                Localidade dadosImportacaoCSV = new Localidade();
+                DadosImportacaoCSV dadosImportacaoCSV = new DadosImportacaoCSV();
                 String[] coluna = linha.split(";");
                 dadosImportacaoCSV.setSiglaRegiao(coluna[0]);
                 dadosImportacaoCSV.setSiglaEstado(coluna[1]);

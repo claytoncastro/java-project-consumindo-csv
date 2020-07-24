@@ -1,5 +1,7 @@
 package com.desafio.resources;
 
+import com.desafio.dto.HistoricoDTO;
+import com.desafio.dto.UsuarioDTO;
 import com.desafio.model.Historico;
 import com.desafio.services.HistoricoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/historico")
@@ -40,15 +43,20 @@ public class HistoricoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Historico> find(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<HistoricoDTO> find(@PathVariable(value = "id") Long id) {
         Historico historico = service.findById(id);
-        return ResponseEntity.ok().body(historico);
+        return ResponseEntity.ok().body(new HistoricoDTO(historico.getPrecoCombustivelCompra(),
+                historico.getPrecoCombustivelVenda()));
     }
 
     @GetMapping
-    public ResponseEntity<List<Historico>> findAll() {
+    public ResponseEntity<List<HistoricoDTO>> findAll() {
         List<Historico> autorList = service.findAll();
-        return ResponseEntity.ok().body(autorList);
+        List<HistoricoDTO> historicosDTO = autorList.stream()
+                .map(historico -> new HistoricoDTO(historico.getPrecoCombustivelCompra(),
+                        historico.getPrecoCombustivelVenda()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(historicosDTO);
     }
 
     @DeleteMapping(value = "/{id}")

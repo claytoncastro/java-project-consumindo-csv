@@ -31,8 +31,9 @@ util/collection-postman/api-consumo-csv.postman_collection.json
 # Funcionalidades do Sistema
 ### Documentação
 * Documentação interativa. O acesso a essa URI não requer autenticação:
+    * A documentação interativa pode ser encontrada no diretório:
     ~~~
-    A documentação ode ser encontrada no diretório: util/collection-postman/api-consumo-csv.postman_collection.json
+    util/collection-postman/api-consumo-csv.postman_collection.json
     ~~~
 ### CRUDs
 * Recurso para CRUD de usuários;

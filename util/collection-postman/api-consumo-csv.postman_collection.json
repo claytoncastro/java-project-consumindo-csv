@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "34a0375e-5243-4188-87de-8d597dd38939",
+		"name": "api-consumo-csv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Importação",
+			"item": [
+				{
+					"name": "Importação do CSV",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "C:/Users/Henriques/Desktop/Desafio/Arquivo/arquivo.csv",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/importacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"importacao"
+							]
+						},
+						"description": "É necessário informar o caminho onde está o arquivo, sendo que, deverá ser colocado em apenas uma linha."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4538f6d2-3054-47dd-9d76-1a105676f876",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "82b09df5-ae03-4b75-b12a-8bf493cb6510",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Regras dos Dados da Importação",
+			"item": [
+				{
+					"name": "Média preço combustível por município",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "BRASILIA"
+						},
+						"url": {
+							"raw": "localhost:8090/dadosimportacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"dadosimportacao"
+							]
+						},
+						"description": "Essa requisição trás a média de preço do combustível por município, vindo como retorno a média de preço de venda e média de preço de compra."
+					},
+					"response": []
+				},
+				{
+					"name": "Dados por Sigla da Região",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "CO"
+						},
+						"url": {
+							"raw": "localhost:8090/dadosimportacao/porsiglaregiao",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"dadosimportacao",
+								"porsiglaregiao"
+							]
+						},
+						"description": "Essa requisição trás todos os dados importados por sigla da região. Deve-se informar no Body a sigla da região."
+					},
+					"response": []
+				},
+				{
+					"name": "Valor médio compra e valor médio venda",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "te",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "RAIZEN",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/dadosimportacao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"dadosimportacao",
+								"1"
+							]
+						},
+						"description": "Essa requisição trás o valor médio compra e valor médio venda sendo filtrado por município ou bandeira. Para isso foi construido um enum onde, se deseja trazer a média para município deve-se colocar como PathVariable o valor 0, e se para bandeira, o valor 1. Em seguida deve-se informar no Body o município, se selecionou 0, ou bandeira, se selecionou 1."
+					},
+					"response": []
+				},
+				{
+					"name": "Agrupar por Distribuidora ou Data Coleta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8090/dadosimportacao/dadosAgrupados/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"dadosimportacao",
+								"dadosAgrupados",
+								"1"
+							]
+						},
+						"description": "Essa requisição trás todos os dados agrupados por Distribuidora ou Data Coleta. Para isso foi construido um enum onde, 0 corresponde a Distribuidora e 1 a Data Coleta. Para Distribuidora deve-se colocar como PathVariable o valor 0 e para Data Coleta, o valor 1."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CRUDs",
+			"item": [
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "Usuário - Lista todos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"usuario"
+									]
+								},
+								"description": "Essa requisição tem por objetivo a listagem de todos os usuários."
+							},
+							"response": []
+						},
+						{
+							"name": "Usuário - Salvar",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\":\"José Duarte\",\r\n    \"login\":\"jose_duarte\",\r\n    \"senha\":\"jose123\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:8090/usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"usuario"
+									]
+								},
+								"description": "Essa requisição tem por objetivo o salvamento de um Usuário."
+							},
+							"response": []
+						},
+						{
+							"name": "Usuário - Achar por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/usuario/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"usuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuário - Update de um Usuário",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\":\"José Duarte da Silva\",\r\n    \"login\":\"jose_duarte\",\r\n    \"senha\":\"jose123\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost:8090/usuario/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"usuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuário - Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/usuario/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"usuario",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Histórico",
+					"item": [
+						{
+							"name": "Histórico - Salvar",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"precoCombustivelCompra\":3.50,\r\n    \"precoCombustivelVenda\":3.90\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8090/historico",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"historico"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Histórico - Lista todos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/historico",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"historico"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Histórico - Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"precoCombustivelCompra\": 4.00,\r\n    \"precoCombustivelVenda\": 4.20\r\n}"
+								},
+								"url": {
+									"raw": "localhost:8090/historico/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"historico",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Histórico - Achar por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/historico/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"historico",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Histórico - Deletar",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8090/historico/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"historico",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

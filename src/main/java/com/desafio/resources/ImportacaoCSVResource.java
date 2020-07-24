@@ -2,6 +2,7 @@ package com.desafio.resources;
 
 import com.desafio.services.ImportacaoCSVService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +20,14 @@ public class ImportacaoCSVResource {
     private ImportacaoCSVService service;
 
     @PostMapping
-    public void importarCSV(@RequestBody String path) throws IOException, ParseException {
+    public ResponseEntity<Void> importarCSV(@RequestBody String path) throws IOException, ParseException {
         service.importarCSV(path);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
-    public void limparBase() {
+    public ResponseEntity<Void> limparBase() {
         service.limparBase();
+        return ResponseEntity.noContent().build();
     }
 }

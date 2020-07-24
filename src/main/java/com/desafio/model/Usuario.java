@@ -15,6 +15,13 @@ public class Usuario implements AbstractEntity {
     private String login;
     private String senha;
 
+    public Usuario(String nome, String login) {
+        this.nome = nome;
+        this.login = login;
+    }
+
+    public Usuario() {}
+
     @Override
     public Long getId() {
         return id;

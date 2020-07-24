@@ -1,5 +1,6 @@
 package com.desafio.resources;
 
+import com.desafio.dto.UsuarioDTO;
 import com.desafio.model.Usuario;
 import com.desafio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
@@ -19,9 +21,8 @@ public class UsuarioResource {
 
     @PostMapping
     public ResponseEntity<Void> salvar(@RequestBody Usuario usuario) {
-        service.save(usuario);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(usuario.getId()).toUri();
+        Usuario user = service.save(usuario);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
@@ -33,15 +34,18 @@ public class UsuarioResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Usuario> find(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<UsuarioDTO> find(@PathVariable(value = "id") Long id) {
         Usuario usuario = service.findById(id);
-        return ResponseEntity.ok().body(usuario);
+        return ResponseEntity.ok().body(new UsuarioDTO(usuario.getNome(), usuario.getLogin()));
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAll() {
-        List<Usuario> autorList = service.findAll();
-        return ResponseEntity.ok().body(autorList);
+    public ResponseEntity<List<UsuarioDTO>> findAll() {
+        List<Usuario> usuarioList = service.findAll();
+        List<UsuarioDTO> livroDto = usuarioList.stream()
+                .map(usuario -> new UsuarioDTO(usuario.getNome(), usuario.getLogin()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(livroDto);
     }
 
     @DeleteMapping(value = "/{id}")

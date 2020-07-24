@@ -2,7 +2,7 @@ package com.desafio.resources;
 
 import com.desafio.dto.DadosImportacaoCSVDTO;
 import com.desafio.model.DadosImportacaoCSV;
-import com.desafio.model.Historico;
+import com.desafio.model.TipoDadosAgrupados;
 import com.desafio.model.TipoValorMedio;
 import com.desafio.services.DadosImportacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,14 @@ public class DadosImportacaoResource {
     @GetMapping("/porsiglaregiao")
     public ResponseEntity<List<DadosImportacaoCSV>> informacaoPorSiglaRegiao(@RequestBody String siglaEstado) {
         List<DadosImportacaoCSV> dadosImportacaoCSVS = service.informacaoPorSiglaRegiao(siglaEstado);
+        return ResponseEntity.ok().body(dadosImportacaoCSVS);
+    }
+
+    @GetMapping("/dadosAgrupados/{id}")
+    public ResponseEntity<List<DadosImportacaoCSV>> dadosAgrupados(
+            @PathVariable(value = "id") int opcaoTipoDadosAgrupados) {
+        List<DadosImportacaoCSV> dadosImportacaoCSVS = service
+                .dadosAgrupados(TipoDadosAgrupados.values()[opcaoTipoDadosAgrupados]);
         return ResponseEntity.ok().body(dadosImportacaoCSVS);
     }
 

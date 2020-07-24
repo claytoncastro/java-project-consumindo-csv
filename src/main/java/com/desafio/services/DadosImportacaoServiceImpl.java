@@ -2,16 +2,15 @@ package com.desafio.services;
 
 import com.desafio.dto.DadosImportacaoCSVDTO;
 import com.desafio.model.DadosImportacaoCSV;
+import com.desafio.model.TipoDadosAgrupados;
 import com.desafio.model.TipoValorMedio;
 import com.desafio.repositories.DadosImportacaoCSVRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.DoubleStream;
 
 @Service
 public class DadosImportacaoServiceImpl implements DadosImportacaoService {
@@ -32,9 +31,17 @@ public class DadosImportacaoServiceImpl implements DadosImportacaoService {
     }
 
     @Override
-    public void dadosAgrupados(Integer opcaoTipoDadosAgrupados) {
-        /** Consultas baseadas em agrupamento por:
-         *  distribuidora e agrupamento por data da coleta */
+    public List<DadosImportacaoCSV> dadosAgrupados(TipoDadosAgrupados opcaoTipoDadosAgrupados) {
+
+        switch (opcaoTipoDadosAgrupados) {
+            case DISTRIBUIDORA:
+                return repository.findAllDadosOrderByDistribuidora();
+
+            case DATA_COLETA:
+                return repository.findAllDadosOrderByDataColeta();
+
+            default: return null;
+        }
     }
 
     @Override

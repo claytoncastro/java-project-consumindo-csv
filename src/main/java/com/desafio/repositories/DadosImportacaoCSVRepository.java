@@ -24,4 +24,10 @@ public interface DadosImportacaoCSVRepository extends JpaRepository<DadosImporta
             + "(lower(dicsv.bandeira) like lower(:bandeira))")
     List<DadosImportacaoCSV> findValorMedioCompraValorMedioVendaByBandeira(@Param("bandeira") String bandeira);
 
+    @Query("SELECT dicsv FROM DadosImportacaoCSV dicsv order by revenda")
+    List<DadosImportacaoCSV> findAllDadosOrderByDistribuidora();
+
+    @Query("SELECT dicsv FROM DadosImportacaoCSV dicsv order by dataColeta")
+    List<DadosImportacaoCSV> findAllDadosOrderByDataColeta();
+
 }
